@@ -28,9 +28,9 @@ int getArraySize() {
 // Функция для генерации массива случайных вещественных чисел
 vector<double> generateRandomArray(int size) {
     vector<double> arr(size);
-    srand(static_cast<unsigned int>(time(0))); // Инициализация генератора случайных чисел
+    srand(static_cast<unsigned int>(time(0)));
     for (int i = 0; i < size; ++i) {
-        arr[i] = (rand() % 200 - 100) + (rand() % 100) / 100.0; // Генерация чисел от -100.0 до 100.0
+        arr[i] = (rand() % 200 - 100) + (rand() % 100) / 100.0;
     }
     return arr;
 }
@@ -50,21 +50,17 @@ double sumPositiveElements(const vector<double>& arr) {
 double productBetweenMinMax(const vector<double>& arr) {
     if (arr.empty()) return 0;
 
-    // Находим индексы минимального и максимального по модулю элементов
     size_t minIndex = 0, maxIndex = 0;
     for (size_t i = 1; i < arr.size(); ++i) {
         if (abs(arr[i]) < abs(arr[minIndex])) minIndex = i;
         if (abs(arr[i]) > abs(arr[maxIndex])) maxIndex = i;
     }
 
-    // Определяем начальный и конечный индексы
     size_t start = min(minIndex, maxIndex);
     size_t end = max(minIndex, maxIndex);
 
-    // Если start и end совпадают, возвращаем 0
     if (start == end) return 0;
 
-    // Вычисляем произведение элементов между start и end
     double product = 1;
     for (size_t i = start + 1; i < end; ++i) {
         product *= arr[i];
@@ -79,31 +75,24 @@ void sortArrayDescending(vector<double>& arr) {
 }
 
 int main() {
-    // Получаем размер массива от пользователя
     int size = getArraySize();
 
-    // Генерируем массив случайных чисел
     vector<double> arr = generateRandomArray(size);
 
-    // Выводим исходный массив
     cout << "Исходный массив: ";
     for (double x : arr) {
         cout << x << " ";
     }
     cout << endl;
 
-    // Вычисляем сумму положительных элементов
     double sumPos = sumPositiveElements(arr);
     cout << "Сумма положительных элементов: " << sumPos << endl;
 
-    // Находим произведение элементов между минимальным и максимальным по модулю
     double product = productBetweenMinMax(arr);
     cout << "Произведение элементов между минимальным и максимальным по модулю: " << product << endl;
 
-    // Сортируем массив по убыванию
     sortArrayDescending(arr);
 
-    // Выводим отсортированный массив
     cout << "Массив, упорядоченный по убыванию: ";
     for (double x : arr) {
         cout << x << " ";
